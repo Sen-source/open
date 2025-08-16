@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sorry Letter</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff8f0;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+    .sorry-letter {
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .papers {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .paper {
+      width: 200px;
+      height: 250px;
+      background: #f9e6e6;
+      border: 2px solid #d9534f;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      perspective: 1000px;
+      position: relative;
+    }
+    .paper-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      transform-origin: top center;
+    }
+    .paper.open .paper-inner {
+      transform: rotateX(-180deg);
+    }
+    .paper-front, .paper-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      padding: 1rem;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .paper-front {
+      background: #f9e6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transform: rotateX(0deg);
+      z-index: 2;
+    }
+    .paper-back {
+      background: white;
+      color: #333;
+      transform: rotateX(180deg);
+      overflow: auto;
+      z-index: 1;
+    }
+    .paper-back img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .audio-player {
+      margin-top: 2rem;
+    }
+    button.play-btn {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button.play-btn:hover {
+      background-color: #c9302c;
+    }
+    .lyrics-window {
+      max-width: 500px;
+      height: 120px;
+      margin: 1rem auto;
+      padding: 1rem;
+      background: #fff;
+      border: 2px solid #d9534f;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      overflow: hidden;
+    }
+    .lyrics-window p {
+      margin: 0.4rem 0;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .lyrics-window p.active {
+      color: #d9534f;
+      font-weight: bold;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sorry-letter">
+    <h2>I'm Sorry</h2>
+    <p>Dear Aya,<br/>
+    I want you to know how much you mean to me. I regret the mistakes 
+    I made and hope we can find our way back to each other.
+    Please give me a chance to prove myself, if you're not ready ngayon I can love you until maging ready ka ulit
+    I don't want our story to end just because of our away, my friends, and such.
+    </p>
+  </div>
+
+  <div class="papers">
+    <div class="paper" onclick="togglePaper(this)">
+      <div class="paper-inner">
+        <div class="paper-front">Reason 1</div>
+        <div class="paper-back">
+          <p>Because we share unforgettable memories and a unique bond.</p>
+          <img src="webcam-toy-photo2.jpg" alt="Memory 1" />
+        </div>
+      </div>
+    </div>
+    <div class="paper" onclick="togglePaper(this)">
+      <div class="paper-inner">
+        <div class="paper-front">Reason 2</div>
+        <div class="paper-back">
+          <p>Because I have grown and learned from my mistakes.</p>
+          <img src="64c7f0ce-b225-4485-8c78-74c47972c936.jpg" alt="Growth" />
+        </div>
+      </div>
+    </div>
+    <div class="paper" onclick="togglePaper(this)">
+      <div class="paper-inner">
+        <div class="paper-front">Reason 3</div>
+        <div class="paper-back">
+          <p>Because our future together can be full of happiness and love.</p>
+          <img src="fd1fb4b2-faaf-4acb-a107-5a7a8c8c872c.jpg" alt="Future" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p>I know dapat deleted na ito but naka save pala ito sa laptop</p>
+  </div>
+
+  <div class="audio-player">
+    <button class="play-btn" onclick="toggleAudio(event)">Play Song</button>
+    <audio id="song" src="bumalik.mp3"></audio>
+  </div>
+
+  <div id="lyrics-window" class="lyrics-window">
+    <p data-start="32">Magaan na ba ang 'yong paghinga?</p>
+    <p data-start="36">Bumalik ka na sa'kin</p>
+    <p data-start="40">Klaro na ba ang isip, sinta?</p>
+    <p data-start="43">Bumalik ka na sa'kin</p>
+
+    <p data-start="47">Hindi ka na nagparamdam</p>
+    <p data-start="36">Buhat ng cool off, ako'y nahibang</p>
+   
+    <p data-start="55">Sige na, please 'wag nang mainis</p>
+    <p data-start="59">Bumalik ka na sa'kin</p>
+    <p data-start="63">Sorry mahal, ika'y nasaktan</p>
+    <p data-start="66">Bumalik ka na sa'kin</p>
+    <p data-start="71">Bumalik ka na sa akin</p>
+    
+    <p data-start="83">Kung papabayaan lang kita</p>
+    <p data-start="86">Baka tuluyan ka nang mawala</p>
+    <p data-start="90">Sana naman pagbigyan mo na</p>
+    <p data-start="94">Pangakong 'di na mauulit pa</p>
+
+    <p data-start="97">Katulad mong tao lang ako</p>
+    <p data-start="101">Napapasabak din sa gulo</p>
+
+    <p data-start="106">Sige na, please 'wag nang mainis</p>
+    <p data-start="109">Bumalik ka na sa'kin</p>
+    <p data-start="113">Sorry mahal, ika'y nasaktan</p>
+    <p data-start="117">Bumalik ka na sa'kin</p>
+
+    <p data-start="129">'Wag mo sana akong ipagpalit</p>
+    <p data-start="135">Ikaw at ako na lang ulit, ulit</p>
+
+    <p data-start="139">Sige na, please 'wag nang mainis</p>
+    <p data-start="141">Bumalik ka na sa'kin</p>
+    <p data-start="144">Sorry mahal, ika'y nasaktan</p>
+    <p data-start="145">Bumalik ka na sa'kin</p>
+    <p data-start="148">Sige na, please 'wag nang mainis</p>
+    <p data-start="150">Bumalik ka na sa'kin</p>
+    <p data-start="153">Sorry mahal, ika'y nasaktan</p>
+    <p data-start="180">Bumalik ka na sa'kin</p>
+
+    <p data-start="185">Sige na, please (Bumalik ka na sa'kin)</p>
+    <p data-start="188">Sorry mahal (Bumalik ka na sa'kin)</p>
+    <p data-start="192">Bumalik ka na sa akin</p>
+  </div>
+
+  <script>
+    function togglePaper(paper) {
+      paper.classList.toggle('open');
+    }
+
+    function toggleAudio(event) {
+      const audio = document.getElementById('song');
+      const btn = event.target;
+      if(audio.paused) {
+        audio.play();
+        btn.textContent = 'Pause Song';
+      } else {
+        audio.pause();
+        btn.textContent = 'Play Song';
+      }
+    }
+
+    const audio = document.getElementById("song");
+    const lyricsWindow = document.getElementById("lyrics-window");
+    const lyricsLines = document.querySelectorAll("#lyrics-window p");
+
+    audio.ontimeupdate = () => {
+      let currentTime = audio.currentTime;
+
+      let activeIndex = -1;
+      lyricsLines.forEach((line, i) => {
+        let start = parseFloat(line.dataset.start);
+        let next = i < lyricsLines.length - 1 
+                     ? parseFloat(lyricsLines[i+1].dataset.start) 
+                     : audio.duration;
+
+        if (currentTime >= start && currentTime < next) {
+          activeIndex = i;
+        }
+      });
+
+      if (activeIndex !== -1) {
+        let blockStart = Math.floor(activeIndex / 4) * 4;
+        let blockEnd = blockStart + 4;
+
+        lyricsWindow.innerHTML = "";
+        for (let i = blockStart; i < blockEnd && i < lyricsLines.length; i++) {
+          let line = lyricsLines[i].cloneNode(true);
+          if (i === activeIndex) line.classList.add("active");
+          lyricsWindow.appendChild(line);
+        }
+      }
+    };
+  </script>
+</body>
+</html>
